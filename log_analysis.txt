@@ -1,0 +1,14 @@
+Task 1: Nginx Log Analysis
+
+Top 5 IP addresses by request count:
+
+221.34.171.155 : 310 requests
+145.98.68.30 : 299 requests
+110.105.174.63 : 297 requests
+49.217.128.165 : 295 requests
+24.74.238.114 : 283 requests
+
+Percentage of requests with status in the 400–599 range : 47.48%
+
+
+Average response size in bytes for GET requests : 2540.77 bytes

@@ -2,10 +2,10 @@ import re
 from datetime import datetime
 
 def parse_log_line(log_line):
-    pattern = r'(\d+\.\d+\.\d+\.\d+) - (\w+) \[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})\] "(\w+\.\w+\.\w+)" "(\w+ /.+ HTTP/\d\.\d)" (\d+) (\d+) (\d+)'
+    pattern = r'(\d+\.\d+\.\d+\.\d+) - (\w+) \[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})\] "\S+" "\S+ .+ HTTP/\d\.\d" (\d{3}) (\d+) (\d+)'
     match = re.match(pattern, log_line)
     if match:
-        ip, action, timestamp_str, domain, request, status, bytes_sent, unknown = match.groups()
+        ip, action, timestamp_str, status, bytes_sent, unknown = match.groups()
         timestamp = datetime.strptime(timestamp_str, '%d/%b/%Y:%H:%M:%S %z')
         return {
             'timestamp': timestamp,
@@ -16,7 +16,12 @@ def parse_log_line(log_line):
         return None
 
 def is_error_status(status):
-    return status >= 400 and status <= 599
+    try:
+        status = int(status)
+        return 400 <= status <= 599
+    except ValueError:
+        return False
+
 
 def monitor_logs(log_file):
     with open(log_file, 'r') as f:
@@ -44,7 +49,7 @@ def monitor_logs(log_file):
             if window_requests > 0:
                 error_rate = window_errors / window_requests
                 if error_rate > error_threshold:
-                    print(f"Alert! Error rate {error_rate}% exceeds threshold at {current_window_start}")
+                    print(f"Alert! Error rate {error_rate:.2%} exceeds threshold at {current_window_start}")
             current_window_start = timestamp
             window_requests = 0
             window_errors = 0
@@ -53,8 +58,9 @@ def monitor_logs(log_file):
         if is_error_status(status):
             window_errors += 1
 
-    error_rate = window_errors / window_requests
-    if error_rate > error_threshold:
-        print(f"Alert! Error rate {error_rate}% exceeds threshold at {current_window_start}")
+    if window_requests > 0:
+        error_rate = window_errors / window_requests
+        if error_rate > error_threshold:
+            print(f"Alert! Error rate {error_rate:.2%} exceeds threshold at {current_window_start}")
 
 monitor_logs('nginx_access.log')

@@ -1,0 +1,37 @@
+
+--- Task 03 : Attack Pattern Detection Report ---
+
+
+High Request Rate IPs:
+  - 49.217.128.165 made 352 requests
+   - 24.74.238.114 made 355 requests
+   - 110.105.174.63 made 361 requests
+   - 49.17.221.77 made 350 requests
+   - 32.90.145.204 made 354 requests
+   - 188.230.178.192 made 315 requests
+   - 221.34.171.155 made 383 requests
+   - 145.98.68.30 made 380 requests
+ 
+
+  High Error Rate IPs:
+  - 49.217.128.165 caused 232 errors (4xx/5xx)
+   - 24.74.238.114 caused 248 errors (4xx/5xx)
+   - 110.105.174.63 caused 239 errors (4xx/5xx)
+   - 49.17.221.77 caused 229 errors (4xx/5xx)
+   - 188.230.178.192 caused 225 errors (4xx/5xx)
+   - 221.34.171.155 caused 244 errors (4xx/5xx)
+   - 145.98.68.30 caused 241 errors (4xx/5xx)
+   - 32.90.145.204 caused 236 errors (4xx/5xx)
+ 
+
+  Potential Brute-force Login IPs:
+  - 49.217.128.165 attempted to access /login 352 times
+   - 24.74.238.114 attempted to access /login 355 times
+   - 110.105.174.63 attempted to access /login 361 times
+   - 49.17.221.77 attempted to access /login 350 times
+   - 32.90.145.204 attempted to access /login 354 times
+   - 188.230.178.192 attempted to access /login 315 times
+   - 221.34.171.155 attempted to access /login 383 times
+   - 145.98.68.30 attempted to access /login 380 times
+ 
+--- End of Task 03 Report ---

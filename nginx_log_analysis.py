@@ -42,7 +42,7 @@ with open(logFilePath, 'r') as logFile:
 
 # Write analysis results to output file
 with open(outputFilePath, "w") as outputFile:
-    outputFile.write("Task 1: Nginx Log Analysis\n\n")
+    outputFile.write("Task 1: Nginx Log Analysis Report \n\n")
 
     # Top 5 IPs by request count
     outputFile.write("Top 5 IP addresses by request count:\n\n")
@@ -66,3 +66,6 @@ with open(outputFilePath, "w") as outputFile:
     else:
         avgGetResponseSize = 0   
     outputFile.write(f"Average response size in bytes for GET requests : {avgGetResponseSize:.2f} bytes\n")
+
+
+outputFile.write("\n--- End of Task 01 Report ---")
